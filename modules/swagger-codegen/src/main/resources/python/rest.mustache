@@ -130,7 +130,7 @@ class RESTClientObject(object):
                                                   body=request_body,
                                                   headers=headers)
                 if headers['Content-Type'] == 'application/x-www-form-urlencoded':
-                    r = self.pool_manager.request(method, url,
+                    r = self.pool_manager.request_encode_body(method, url,
                                                   fields=post_params,
                                                   encode_multipart=False,
                                                   headers=headers)
