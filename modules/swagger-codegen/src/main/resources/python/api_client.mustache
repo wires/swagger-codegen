@@ -448,10 +448,12 @@ class ApiClient(object):
 
         content_types = list(map(lambda x: x.lower(), content_types))
 
-        if 'application/json' in content_types:
-            return 'application/json'
-        else:
-            return content_types[0]
+        formEncodedFirst = sorted(content_types, key=lambda s: -len(s))
+
+        # instead of preferring JSON, we pick x-www-form-urlencoded
+        # when it is supported
+        return formEncodedFirst[0]
+
 
     def update_params_for_auth(self, headers, querys, auth_settings):
         """
